@@ -114,6 +114,8 @@
   openrgb
   nextcloud-client
   proton-pass
+  git
+  joplin-desktop
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -159,6 +161,10 @@ hardware.steam-hardware.enable = true;
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  # Personal Notes:
+  # Created Github SSH which was saved to '/home/nixos/.ssh'. I added it to Nextcloud>Documents
+
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
