@@ -116,7 +116,60 @@
   proton-pass
   git
   joplin-desktop
+  brave
+  btop
+  pkgs.streamdeck-ui
+  obs-studio
+  alacritty
+  nodejs_22
+  claude-code
+  fish
+  fastfetch
+  tmux
+
+   (python3.withPackages (ps: with ps; [
+    ps.elgato
+    # If not available, I will help you install via pip
+  ]))
+
+  (pkgs.writeScriptBin "toggle-elgato-light" ''
+  #!${python3.withPackages (ps: with ps; [ ps.elgato ])}/bin/python3
+  import asyncio
+  from elgato import Elgato
+  async def main():
+    e = Elgato("172.20.2.66")
+    info = await e.state()
+    await e.light(on=not info.on)
+  asyncio.run(main())
+'')
+ # scripts to change brightness on Stream Deck
+(pkgs.writeScriptBin "elgato-light-brightness-up" ''
+  #!${python3.withPackages (ps: with ps; [ ps.elgato ])}/bin/python3
+  import asyncio
+  from elgato import Elgato
+
+  async def main():
+      async with Elgato("172.20.2.66") as e:
+          state = await e.state()
+          new_brightness = min(100, state.brightness + 10)
+          await e.light(brightness=new_brightness)
+  asyncio.run(main())
+'')
+
+(pkgs.writeScriptBin "elgato-light-brightness-down" ''
+  #!${python3.withPackages (ps: with ps; [ ps.elgato ])}/bin/python3
+  import asyncio
+  from elgato import Elgato
+
+  async def main():
+      async with Elgato("172.20.2.66") as e:
+          state = await e.state()
+          new_brightness = max(0, state.brightness - 10)
+          await e.light(brightness=new_brightness)
+  asyncio.run(main())
+'')
   ];
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -129,6 +182,22 @@
    # Load I2C kernel modules for OpenRGB (I did this - ChatGPT helped)
   boot.kernelModules = [ "i2c-dev" "i2c-piix4" ];
 
+  # This is to allow my Streamdeck to work. Got it from ChatGPT
+  services.udev.extraRules = ''
+  SUBSYSTEM=="usb", ATTRS{idVendor}=="0fd9", MODE="0666"
+'';
+
+ # This is to search for local hostnames on my network. Needed it for Elgato Stream Deck. Gave by ChatGPT.
+services.avahi = {
+  enable = true;
+  nssmdns = true;
+  publish.enable = true;
+};
+
+fonts.packages = with pkgs; [
+  # ... your existing fonts
+  jetbrains-mono
+];
 
   # Steam and graphics support - This is better than installing steam as a package above
 programs.steam = {
