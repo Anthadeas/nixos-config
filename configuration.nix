@@ -11,8 +11,10 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+boot.loader.systemd-boot.enable = true;
+boot.loader.efi.canTouchEfiVariables = true;
+
+
 
   #Enable experimental features (I put this in)
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -102,6 +104,8 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -126,6 +130,10 @@
   fish
   fastfetch
   tmux
+  libreoffice
+  calibre
+  freetube
+  rpi-imager
 
    (python3.withPackages (ps: with ps; [
     ps.elgato
