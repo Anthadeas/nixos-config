@@ -126,7 +126,6 @@ boot.loader.efi.canTouchEfiVariables = true;
   obs-studio
   alacritty
   nodejs_22
-  claude-code
   fish
   fastfetch
   tmux
@@ -225,13 +224,15 @@ hardware.graphics = {
   enable32Bit = true;
 };
 
+# Enable Wake-on-LAN for your Ethernet interface
+networking.interfaces.enp7s0.wakeOnLan.enable = true;
 
 hardware.steam-hardware.enable = true;
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
