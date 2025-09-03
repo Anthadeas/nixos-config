@@ -133,6 +133,7 @@ boot.loader.efi.canTouchEfiVariables = true;
   calibre
   freetube
   rpi-imager
+  ethtool
 
    (python3.withPackages (ps: with ps; [
     ps.elgato
