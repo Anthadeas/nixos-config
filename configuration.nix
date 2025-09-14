@@ -134,6 +134,7 @@ boot.loader.efi.canTouchEfiVariables = true;
   freetube
   rpi-imager
   ethtool
+  obsidian
 
    (python3.withPackages (ps: with ps; [
     ps.elgato
