@@ -135,6 +135,7 @@ boot.loader.efi.canTouchEfiVariables = true;
   rpi-imager
   ethtool
   obsidian
+  plexamp
 
    (python3.withPackages (ps: with ps; [
     ps.elgato
