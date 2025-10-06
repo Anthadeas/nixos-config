@@ -5,6 +5,12 @@ set -e  # Exit on any error
 echo "=== NixOS Config Recovery Script ==="
 echo ""
 
+# Step 0: Ensure curl is available (for future runs)
+if ! command -v curl &> /dev/null; then
+    echo "[0/5] Installing curl..."
+    nix-env -iA nixos.curl
+fi
+
 # Step 1: Install git
 echo "[1/5] Installing git..."
 nix-env -iA nixos.git
