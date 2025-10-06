@@ -65,6 +65,8 @@ boot.loader.efi.canTouchEfiVariables = true;
     variant = "";
   };
 
+
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -136,6 +138,8 @@ boot.loader.efi.canTouchEfiVariables = true;
   ethtool
   obsidian
   plexamp
+  android-tools
+
 
    (python3.withPackages (ps: with ps; [
     ps.elgato
