@@ -139,7 +139,7 @@ boot.loader.efi.canTouchEfiVariables = true;
   obsidian
   plexamp
   android-tools
-
+  neovim
 
    (python3.withPackages (ps: with ps; [
     ps.elgato
