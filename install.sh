@@ -73,21 +73,24 @@ sudo cp /tmp/nixos-config/configuration.nix /mnt/etc/nixos/configuration.nix
 # Keep the generated hardware-configuration.nix (has correct UUIDs)
 echo "Using generated hardware-configuration.nix for this machine"
 
-echo "[8/8] Installing NixOS (this will take 15-30 minutes)..."
+eecho "[8/8] Installing NixOS (this will take 15-30 minutes)..."
 echo "The system will download and install all packages from your config..."
 echo ""
-sudo nixos-install --no-root-password
+echo "⚠️  You will be prompted to set a ROOT password during installation."
+echo "   Remember this password - you'll need it to login and set your user password."
+echo ""
+sudo nixos-install
 
 echo ""
 echo "=== Installation Complete! ==="
 echo ""
-echo "What happens next:"
-echo "1. Reboot the system"
-echo "2. Remove the USB drive"
-echo "3. Login with your configured user (check configuration.nix for username)"
-echo "4. Set your user password: sudo passwd <username>"
+echo "IMPORTANT - After reboot:"
+echo "1. Login as 'root' with the password you just set"
+echo "2. Set your user password: passwd nixos"
+echo "3. Logout and login as 'nixos'"
 echo ""
 echo "Reboot now? (y/n)"
+
 read -r response
 if [[ "$response" =~ ^[Yy]$ ]]; then
     sudo reboot
