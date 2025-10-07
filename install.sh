@@ -73,7 +73,7 @@ sudo cp /tmp/nixos-config/configuration.nix /mnt/etc/nixos/configuration.nix
 # Keep the generated hardware-configuration.nix (has correct UUIDs)
 echo "Using generated hardware-configuration.nix for this machine"
 
-eecho "[8/8] Installing NixOS (this will take 15-30 minutes)..."
+echo "[8/8] Installing NixOS (this will take 15-30 minutes)..."
 echo "The system will download and install all packages from your config..."
 echo ""
 echo "⚠️  You will be prompted to set a ROOT password during installation."
