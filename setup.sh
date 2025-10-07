@@ -31,10 +31,19 @@ echo "[3/5] Backing up current configuration..."
 sudo cp /etc/nixos/configuration.nix /etc/nixos/configuration.nix.backup
 echo "Backup saved to /etc/nixos/configuration.nix.backup"
 
-# Step 4: Copy your config over
+# Step 4: Copy your config over BUT keep hardware-configuration.nix
 echo "[4/5] Applying your configuration..."
 sudo cp ~/nixos-config/configuration.nix /etc/nixos/configuration.nix
-echo "Kept existing hardware-configuration.nix (has correct UUIDs for this PC)"
+
+# IMPORTANT: Check if hardware-configuration.nix exists in /etc/nixos
+if [ ! -f /etc/nixos/hardware-configuration.nix ]; then
+    echo "ERROR: /etc/nixos/hardware-configuration.nix is missing!"
+    echo "This file should have been created during NixOS installation."
+    echo "Cannot proceed without it."
+    exit 1
+fi
+
+echo "Using existing hardware-configuration.nix (has correct UUIDs for this PC)"
 
 # Step 5: Rebuild
 echo "[5/5] Rebuilding system (this will take 10-20 minutes)..."
