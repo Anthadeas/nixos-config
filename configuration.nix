@@ -140,6 +140,7 @@ boot.loader.efi.canTouchEfiVariables = true;
   plexamp
   android-tools
   neovim
+  moonlight
 
    (python3.withPackages (ps: with ps; [
     ps.elgato
