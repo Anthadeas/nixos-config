@@ -142,6 +142,19 @@ boot.loader.efi.canTouchEfiVariables = true;
   neovim
   moonlight-qt
 
+
+
+  # Wine and Lutris for Project Ascension
+(lutris.override {
+  extraPkgs = pkgs: [
+    wineWowPackages.staging
+    winetricks
+  ];
+})
+wineWowPackages.staging
+winetricks
+
+
    (python3.withPackages (ps: with ps; [
     ps.elgato
     # If not available, I will help you install via pip
