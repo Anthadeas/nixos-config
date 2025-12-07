@@ -106,6 +106,10 @@ boot.loader.efi.canTouchEfiVariables = true;
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  #Remove this later Kyle. This is a dependency for Stream Deck GUI software that mostly isn't working anyway.
+  nixpkgs.config.permittedInsecurePackages = [
+  "mbedtls-2.28.10"
+];
 
 
   # List packages installed in system profile. To search, run:
@@ -124,7 +128,6 @@ boot.loader.efi.canTouchEfiVariables = true;
   joplin-desktop
   brave
   btop
-  pkgs.streamdeck-ui
   obs-studio
   alacritty
   nodejs_22
@@ -134,14 +137,14 @@ boot.loader.efi.canTouchEfiVariables = true;
   libreoffice
   calibre
   freetube
-  rpi-imager
   ethtool
   obsidian
   plexamp
   android-tools
   neovim
   moonlight-qt
-
+  vlc
+  appimage-run #Added for Awakened POE Trade or other Appimages
 
 
   # Wine and Lutris for Project Ascension
@@ -151,8 +154,7 @@ boot.loader.efi.canTouchEfiVariables = true;
     winetricks
   ];
 })
-wineWowPackages.staging
-winetricks
+
 
 
    (python3.withPackages (ps: with ps; [
@@ -198,6 +200,12 @@ winetricks
 '')
   ];
 
+
+  # Enable FHS for AppImages
+programs.appimage = {
+  enable = true;
+  binfmt = true;  # This lets you run AppImages directly
+};
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
